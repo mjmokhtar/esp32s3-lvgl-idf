@@ -1,0 +1,64 @@
+# sdkconfig.defaults
+# Fuel Monitoring HMI — ESP32-S3 Waveshare 7" RGB
+# Merged from: 08_lvgl_Porting + TWAI example + fuel_hmi font requirements
+
+# ── Target & CPU ────────────────────────────────────────────
+CONFIG_IDF_TARGET="esp32s3"
+CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_240=y
+
+# ── Flash ───────────────────────────────────────────────────
+CONFIG_ESPTOOLPY_FLASHMODE_QIO=y
+CONFIG_ESPTOOLPY_FLASHFREQ_80M=y
+CONFIG_ESPTOOLPY_FLASHSIZE_8MB=y
+
+# ── PSRAM (SPIRAM) ──────────────────────────────────────────
+CONFIG_SPIRAM=y
+CONFIG_SPIRAM_MODE_OCT=y
+CONFIG_SPIRAM_SPEED_80M=y
+CONFIG_SPIRAM_RODATA=y
+CONFIG_IDF_EXPERIMENTAL_FEATURES=y
+CONFIG_SPIRAM_FETCH_INSTRUCTIONS=y
+
+# ── FreeRTOS ─────────────────────────────────────────────────
+CONFIG_FREERTOS_HZ=1000
+
+# ── Cache ───────────────────────────────────────────────────
+CONFIG_ESP32S3_DATA_CACHE_LINE_64B=y
+
+# ── CAN GPIO (Waveshare: GPIO19=TX, GPIO20=RX via CH422G) ───
+CONFIG_EXAMPLE_TX_GPIO_NUM=20
+CONFIG_EXAMPLE_RX_GPIO_NUM=19
+
+# ── LVGL port ────────────────────────────────────────────────
+CONFIG_EXAMPLE_LVGL_PORT_TASK_CORE=1
+CONFIG_EXAMPLE_LVGL_PORT_AVOID_TEAR_ENABLE=y
+
+# ── LVGL core ────────────────────────────────────────────────
+CONFIG_LV_COLOR_SCREEN_TRANSP=y
+CONFIG_LV_MEM_CUSTOM=y
+CONFIG_LV_MEMCPY_MEMSET_STD=y
+CONFIG_LV_ATTRIBUTE_FAST_MEM_USE_IRAM=y
+CONFIG_LV_USE_LOG=y
+CONFIG_LV_LOG_PRINTF=y
+CONFIG_LV_USE_PERF_MONITOR=y
+CONFIG_LV_USE_FONT_COMPRESSED=y
+CONFIG_LV_USE_IMGFONT=y
+
+# ── LVGL Montserrat fonts ─────────────────────────────────────
+# Semua size yang dipakai fuel_hmi.c:
+CONFIG_LV_FONT_MONTSERRAT_10=y   # label hint/dim, legend, CAN status
+CONFIG_LV_FONT_MONTSERRAT_12=y   # topbar title
+CONFIG_LV_FONT_MONTSERRAT_14=y   # volume label, loco ID
+CONFIG_LV_FONT_MONTSERRAT_16=y   # (reserve)
+CONFIG_LV_FONT_MONTSERRAT_18=y   # fuel temp value, est. range
+CONFIG_LV_FONT_MONTSERRAT_20=y   # (reserve)
+CONFIG_LV_FONT_MONTSERRAT_22=y   # metric cards: flow, net, total
+CONFIG_LV_FONT_MONTSERRAT_24=y   # (reserve)
+CONFIG_LV_FONT_MONTSERRAT_28=y   # arc gauge percent
+
+# ── LVGL demo (hapus jika tidak dipakai, hemat ~80KB flash) ──
+# CONFIG_LV_USE_DEMO_WIDGETS=y
+# CONFIG_LV_USE_DEMO_BENCHMARK=y
+# CONFIG_LV_USE_DEMO_STRESS=y
+# CONFIG_LV_USE_DEMO_MUSIC=y
+# CONFIG_LV_DEMO_MUSIC_AUTO_PLAY=y
